@@ -1,0 +1,9 @@
+<p>Author Works</p>
+<h5>authorname {{author.name}} </h5>
+
+<div *ngFor="let authorObj of authorList">
+<p>{{ authorObj.name }}</p>
+
+</div>
+
+<button (click)="getAuthorById(1)">Get an Author</button>

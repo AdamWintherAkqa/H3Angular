@@ -1,0 +1,13 @@
+<p>side1 works!</p>
+<h2>Name: {{name}} <br> ID: {{authorId}} <br> Password: {{password}} <br> Is Alive: {{isAlive}} </h2> <!-- Her er der en variable-->
+<button (click)="myMethod()">hej med dig</button> <!-- Her er der et event / variable-->
+<button (click)="myMethod2('Hello')">hej med dig</button>
+<button (click)="myMethod3(isAlive)">Er du i live?</button>
+<button (click)="myMethod4(age)">Hvor gammel er du?</button>
+<button (click)="myMethod5(isAlive)">Er du mon i live?</button>
+
+<h3>Din liste: {{list}}</h3>
+<h3>Din tomme liste: {{list2}}</h3>
+<p *ngIf="true">this is true</p>
+<p *ngIf="false">this is false</p>
+<p *ngIf="isAlive">this is Alive</p>
