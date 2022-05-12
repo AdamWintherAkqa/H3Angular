@@ -6,44 +6,46 @@ import { AuthorService } from 'src/app/services/author.service';
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
-  styleUrls: ['./author.component.css']
+  styleUrls: ['./author.component.css'],
 })
 export class AuthorComponent implements OnInit {
-  title = 'My title'; //typeløst
-  title2 : string = 'my title';
+  // title = 'My title'; //typeløst
+  // title2: string = 'my title';
 
-  author : IAuthor;
-  authorList : IAuthor[] = [];
+  authorList: IAuthor[] = [];
 
-  constructor(private authorService:AuthorService) { //DI
-    this.author={authorId:1, name:'Bo'}
-    this.author={authorId:2, name:'Joe'}
-
-    this.authorList = [
-      {authorId:1, name:'Joe'},
-      {authorId:2, name:'Bo'},
-      {authorId:3, name:'Christian'}
-    ];
-    console.log(this.authorList);
-   }
+  constructor(private authorService: AuthorService) {}
 
   ngOnInit(): void {
-    //Kalde en metode.
-    console.log(this.authorService.hansOgGrethe());
+    // //Kalde en metode.
+    // console.log(this.authorService.hansOgGrethe());
 
-    //Hente værdi til liste fra vores service
+    // //Hente værdi til liste fra vores service
 
-      console.log(this.authorService.getAllAuthors());
-      console.log(this.authorService.getAuthorById(1));
-      //Invoke
-      this.getAuthorById(2);
+    // console.log(this.authorService.getAllAuthorsHC());
+    // console.log(this.authorService.getAuthorByIdHC(1));
+    // //Invoke
+    // this.getAuthorById(2);
 
+    //vi vil gerne simulere en API
+    this.authorService.getAllAuthors().subscribe((data: any) => {
+      console.log(data);
+      this.authorList = data;
+    });
   }
 
-  getAuthorById(authorId:number)
-  {
-    console.log(this.authorService.getAuthorById(authorId));
+  // getAuthorById(authorId: number) {
+  //   console.log(this.authorService.getAuthorByIdHC(authorId));
+  // }
+
+  createAuthor() {
+    let author: IAuthor = { authorId: 0, name: 'Moe' };
+    this.authorService.createAuthor(author).subscribe();
+  }
+  deleteAuthor() {
+    //service subscribe
+    // this.authorList.splice(0, 1); // position, antal
+    // this.authorList.findIndex // hvilket objekt på hvilken index
+    // this.authorList.filter // denne returnerer en liste uden det objekt vi vil fjerne
   }
 }
-
-
