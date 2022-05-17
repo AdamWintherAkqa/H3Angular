@@ -19,16 +19,6 @@ export class AuthorService {
   baseUrl: string = 'https://localhost:44304/api/Authors';
   constructor(private http: HttpClient) {} //dependency injection
 
-  // getAllAuthorsHC(): IAuthor[] {
-  //   return [
-  //     { authorId: 1, name: 'Moe' },
-  //     { authorId: 2, name: 'Woop' },
-  //     { authorId: 3, name: 'Bubber' },
-  //   ];
-  // }
-
-  // createAuthor(create: string) {}
-
   getAllAuthors(): Observable<IAuthor[]> {
     return this.http.get<IAuthor[]>(this.baseUrl);
   }
@@ -47,23 +37,4 @@ export class AuthorService {
       httpOptions
     );
   }
-
-  // getAuthorByIdHC(authorId: number): IAuthor {
-  //   let authorList: IAuthor[] = [
-  //     { authorId: 1, name: 'Moe' },
-  //     { authorId: 2, name: 'Woop' },
-  //     { authorId: 3, name: 'Bubber' },
-  //   ];
-  //   return authorList[authorId];
-  // }
-
-  // updateAuthor() {}
-  // deleteAuthor() {}
-  // getAuthorByTitle() {}
-  // getAuthorByName(name: string) {}
-  // getAuthorByBook() {}
-
-  // hansOgGrethe(): string {
-  //   return 'Hansi har kage';
-  // }
 }

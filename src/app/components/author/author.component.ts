@@ -26,7 +26,7 @@ export class AuthorComponent implements OnInit {
     });
   }
 
-  postAuthor() {
+  postAuthor(): void {
     this.authorForm.value.isAlive = this.checked;
     console.log(this.authorForm.value);
     this.authorService.createAuthor(this.authorForm.value).subscribe();
