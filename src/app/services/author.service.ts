@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { IAuthor } from '../interfaces/IAuthor';
+import IAuthor from '../interfaces/IAuthor';
 // 1)Benytte en class der hedder HttpClient - denne service giver os Http, features - HUSK module.ts
 // 2)Async opsætning - hedder Observable
 // 3)Definer en URL til mit API
@@ -33,8 +33,19 @@ export class AuthorService {
     return this.http.get<IAuthor[]>(this.baseUrl);
   }
 
+  getAuthorById(authorId: number): Observable<IAuthor> {
+    return this.http.get<IAuthor>(`${this.baseUrl}/${authorId}`);
+  }
+
   createAuthor(author: IAuthor): Observable<IAuthor> {
     return this.http.post<IAuthor>(this.baseUrl, author, httpOptions);
+  }
+
+  deleteAuthor(authorId: number): Observable<IAuthor> {
+    return this.http.delete<IAuthor>(
+      `${this.baseUrl}/${authorId}`,
+      httpOptions
+    );
   }
 
   // getAuthorByIdHC(authorId: number): IAuthor {

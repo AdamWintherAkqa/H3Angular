@@ -1,7 +1,9 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { IAuthor } from 'src/app/interfaces/IAuthor';
+import IAuthor from 'src/app/interfaces/IAuthor';
 import { AuthorService } from 'src/app/services/author.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-author',
@@ -10,42 +12,50 @@ import { AuthorService } from 'src/app/services/author.service';
 })
 export class AuthorComponent implements OnInit {
   // title = 'My title'; //typeløst
-  // title2: string = 'my title';
-
+  // title2: string = 'my title';;
   authorList: IAuthor[] = [];
+
+  checked = false;
 
   constructor(private authorService: AuthorService) {}
 
   ngOnInit(): void {
-    // //Kalde en metode.
-    // console.log(this.authorService.hansOgGrethe());
-
-    // //Hente værdi til liste fra vores service
-
-    // console.log(this.authorService.getAllAuthorsHC());
-    // console.log(this.authorService.getAuthorByIdHC(1));
-    // //Invoke
-    // this.getAuthorById(2);
-
-    //vi vil gerne simulere en API
     this.authorService.getAllAuthors().subscribe((data: any) => {
       console.log(data);
       this.authorList = data;
     });
   }
 
-  // getAuthorById(authorId: number) {
-  //   console.log(this.authorService.getAuthorByIdHC(authorId));
-  // }
+  postAuthor() {
+    this.authorForm.value.isAlive = this.checked;
+    console.log(this.authorForm.value);
+    this.authorService.createAuthor(this.authorForm.value).subscribe();
 
-  createAuthor() {
-    let author: IAuthor = { authorId: 0, name: 'Moe' };
-    this.authorService.createAuthor(author).subscribe();
+    this.authorList = [...this.authorList, this.authorForm.value];
   }
-  deleteAuthor() {
-    //service subscribe
-    // this.authorList.splice(0, 1); // position, antal
-    // this.authorList.findIndex // hvilket objekt på hvilken index
-    // this.authorList.filter // denne returnerer en liste uden det objekt vi vil fjerne
+
+  getAuthorById(id: any) {
+    var intId: number = +id;
+    this.authorService.getAuthorById(intId).subscribe((data: any) => {
+      console.log(data);
+    });
+  }
+
+  deleteAuthor(id: number) {
+    this.authorService.deleteAuthor(id).subscribe((data: any) => {
+      // console.log(data);
+    });
+    this.authorList = this.authorList.filter((author) => author.authorId != id);
+    console.log(this.authorList);
+  }
+
+  authorForm = new FormGroup({
+    name: new FormControl(''),
+    password: new FormControl(''),
+    isAlive: new FormControl(''),
+  });
+
+  onToggle(temp: any) {
+    this.checked = temp.target.checked;
   }
 }

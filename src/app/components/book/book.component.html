@@ -1,1 +1,46 @@
 <p>book works!</p>
+
+<div *ngFor="let bookObj of bookList">
+  <label for=""
+    >{{ bookObj.bookTitle }}, Is binded: {{ bookObj.binding }}, ID:
+    {{ bookObj.bookId }}</label
+  >
+  <button (click)="deleteBook(bookObj.bookId)">Slet</button>
+</div>
+
+<!-- <button (click)="getBookById(1)">Get an Book</button> -->
+
+<form [formGroup]="bookForm">
+  <label for="">Book Title:</label>
+  <input type="text" formControlName="bookTitle" />
+  <!-- <small
+    *ngIf="personForm.get('name').invalid && personForm.get('name').touched"
+    >Name is required</small -->
+  ><br />
+  <label for="">Pages:</label>
+  <input type="number" formControlName="pages" />
+  <!-- <small
+    *ngIf="personForm.get('mail').invalid && personForm.get('mail').touched"
+    >Email is required</small -->
+  ><br />
+  <label for="">is bound:</label>
+  <input
+    type="checkbox"
+    formControlName="isBound"
+    (change)="onToggle($event)"
+  />
+  <label for="">Release date, and year:</label>
+  <input
+    type="datetime-local"
+    formControlName="releaseYear"
+    (change)="onToggle($event)"
+  />
+  <!-- <small
+    *ngIf="personForm.get('phone').invalid && personForm.get('phone').touched"
+    >Phone is required</small -->
+  ><br />
+  <button type="submit" (click)="postBook()">Create Book</button>
+</form>
+
+<input name="id" type="number" #id />
+<button (click)="getBookById(id.value)">Get an Book</button>

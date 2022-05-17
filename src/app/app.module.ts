@@ -9,6 +9,7 @@ import { Side5Component } from './components/side5/side5.component';
 import { AuthorComponent } from './components/author/author.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BookComponent } from './components/book/book.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,13 @@ import { BookComponent } from './components/book/book.component';
     AuthorComponent,
     BookComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
